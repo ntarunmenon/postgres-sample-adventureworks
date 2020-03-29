@@ -1,0 +1,24 @@
+# Use postgres/example user/password credentials
+version: '3.2'
+
+services:
+
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: adventureworks_user
+      POSTGRES_USER: adventureworks_user
+      POSTGRES_DB: adventureworks
+    ports:
+        - 7000:5432
+    volumes:
+        - "./setup:/data"
+        - "./init-script:/docker-entrypoint-initdb.d"
+
+volumes:
+  setup:
+  init-script:
+
